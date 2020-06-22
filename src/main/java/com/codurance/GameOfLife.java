@@ -2,6 +2,7 @@ package com.codurance;
 import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
 import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GameOfLife {
@@ -56,24 +57,35 @@ public class GameOfLife {
   }
 
   public int countLiveNeighbours(int x, int y) {
+    int[][] cellsToCheck = new int[][]{
+        {x - 1, y - 1},
+        {x - 1, y},
+        {x - 1, y - 1},
+        {x, y - 1},
+        {x, y + 1},
+        {x + 1, y - 1},
+        {x + 1, y},
+        {x + 1, y + 1}
+    };
+
     int liveNeighbours = 0;
-    if(board[x - 1][y - 1]){
-      ++liveNeighbours;
-    }else if(board[x - 1][y]){
-      ++liveNeighbours;
-    }else if(board[x - 1][y - 1]){
-      ++liveNeighbours;
-    }else if(board[x][y - 1]){
-      ++liveNeighbours;
-    }else if(board[x][y + 1]){
-      ++liveNeighbours;
-    }else if(board[x + 1][y - 1]){
-      ++liveNeighbours;
-    }else if(board[x + 1][y]){
-      ++liveNeighbours;
-    }else if(board[x + 1][y + 1]){
-      ++liveNeighbours;
+
+    for(int i = 0; i < cellsToCheck.length; i++){
+      int rowToCheck = cellsToCheck[i][0];
+      int colToCheck = cellsToCheck[i][1];
+
+      if(isInTheGrid(rowToCheck, colToCheck) && isAlive(rowToCheck, colToCheck)){
+        liveNeighbours++;
+      }
     }
     return liveNeighbours;
+  }
+
+  private boolean isAlive(int row, int col) {
+    return board[row][col];
+  }
+
+  private boolean isInTheGrid(int row, int col) {
+    return row >= 0 && col >= 0 && row < rowCount && col < columnCount;
   }
 }
