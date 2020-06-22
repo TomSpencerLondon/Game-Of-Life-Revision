@@ -12,40 +12,26 @@ public class GameOfLife {
   private boolean[][] board;
   private boolean[][] nextGenBoard;
 
-  public GameOfLife(boolean [][] board) {
+  public GameOfLife(boolean[][] board) {
     this.board = board;
     this.rowCount = board.length;
     this.columnCount = board[0].length;
   }
 
   public void nextGen(){
-    if(Arrays.deepEquals(board, new boolean[][]{
-        {false, true, false},
-        {false, true, false},
-        {false, true, false}
-    })){
-      this.board = new boolean[][] {
-          {false, false, false},
-          {true, true, true},
-          {false, false, false}
-      };
-    }else if(Arrays.deepEquals(board, new boolean[][]{
-        {false, false, false, false},
-        {false, true, true, false},
-        {false, true, true, false},
-        {false, false, false, false}
-    })){
-      this.board = new boolean[][] {
-          {false, false, false, false},
-          {false, true, true, false},
-          {false, true, true, false},
-          {false, false, false, false}
-      };
-    } else{
-      this.board = new boolean[][]{{false, false, false},
-          {false, false, false},
-          {false, false, false}};
+    nextGenBoard = new boolean[rowCount][columnCount];
+
+    for(int i = 0; i < rowCount; i++){
+      for(int j = 0; j < columnCount; j++){
+        if(lessThanTwoLiveNeighbours(i, j)){
+          nextGenBoard[i][j] = false;
+        }
+      }
     }
+  }
+
+  private boolean lessThanTwoLiveNeighbours(int x, int y) {
+    return countLiveNeighbours(x, y) < 2;
   }
 
   public boolean[][] getNextGenBoard() {
