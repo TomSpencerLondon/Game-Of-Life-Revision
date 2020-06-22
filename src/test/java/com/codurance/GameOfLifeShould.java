@@ -28,6 +28,28 @@ public class GameOfLifeShould {
   }
 
   @Test
+  void block_stays_the_same() {
+    boolean [][] board = {
+        {false, false, false, false},
+        {false, true, true, false},
+        {false, true, true, false},
+        {false, false, false, false}
+    };
+
+
+    boolean [][] nextBoard = {
+        {false, false, false, false},
+        {false, true, true, false},
+        {false, true, true, false},
+        {false, false, false, false}
+    };
+
+    GameOfLife gameOfLife = new GameOfLife(board);
+    gameOfLife.nextGen();
+    assertArrayEquals(nextBoard, gameOfLife.getBoard());
+  }
+
+  @Test
   void change_blinker_state() {
     boolean [][] board = {
         {false, true, false},
@@ -43,7 +65,11 @@ public class GameOfLifeShould {
 
     GameOfLife gameOfLife = new GameOfLife(board);
     gameOfLife.nextGen();
-    System.out.println(Arrays.deepToString(gameOfLife.getBoard()));
     assertArrayEquals(nextBoard, gameOfLife.getBoard());
+  }
+
+  @Test
+  void name() {
+
   }
 }

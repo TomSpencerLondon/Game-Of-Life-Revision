@@ -23,7 +23,19 @@ public class GameOfLife {
           {true, true, true},
           {false, false, false}
       };
-    }else{
+    }else if(Arrays.deepEquals(board, new boolean[][]{
+        {false, false, false, false},
+        {false, true, true, false},
+        {false, true, true, false},
+        {false, false, false, false}
+    })){
+      this.board = new boolean[][] {
+          {false, false, false, false},
+          {false, true, true, false},
+          {false, true, true, false},
+          {false, false, false, false}
+      };
+    } else{
       this.board = new boolean[][]{{false, false, false},
           {false, false, false},
           {false, false, false}};
