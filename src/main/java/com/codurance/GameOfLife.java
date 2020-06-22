@@ -6,10 +6,15 @@ import java.util.Arrays;
 
 public class GameOfLife {
 
+  private final int rowCount;
+  private final int columnCount;
   private boolean[][] board;
+  private boolean[][] nextGenBoard;
 
   public GameOfLife(boolean [][] board) {
     this.board = board;
+    this.rowCount = board.length;
+    this.columnCount = board[0].length;
   }
 
   public void nextGen(){
@@ -42,7 +47,33 @@ public class GameOfLife {
     }
   }
 
+  public boolean[][] getNextGenBoard() {
+    return nextGenBoard;
+  }
+
   public boolean[][] getBoard() {
     return board;
+  }
+
+  public int countLiveNeighbours(int x, int y) {
+    int liveNeighbours = 0;
+    if(board[x - 1][y - 1]){
+      ++liveNeighbours;
+    }else if(board[x - 1][y]){
+      ++liveNeighbours;
+    }else if(board[x - 1][y - 1]){
+      ++liveNeighbours;
+    }else if(board[x][y - 1]){
+      ++liveNeighbours;
+    }else if(board[x][y + 1]){
+      ++liveNeighbours;
+    }else if(board[x + 1][y - 1]){
+      ++liveNeighbours;
+    }else if(board[x + 1][y]){
+      ++liveNeighbours;
+    }else if(board[x + 1][y + 1]){
+      ++liveNeighbours;
+    }
+    return liveNeighbours;
   }
 }
