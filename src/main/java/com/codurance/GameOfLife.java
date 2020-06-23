@@ -23,17 +23,21 @@ public class GameOfLife {
   }
 
   private void checkCell(int i, int j) {
-    if(aliveLessThanTwoLiveNeighbours(i, j))
-      nextGenBoard[i][j] = false;
-    else if (!aliveLessThanTwoLiveNeighbours(i, j)) {
-      if(aliveLessThanTwoLiveNeighbours(i, j) || aliveMoreThanThreeLiveNeighbours(i, j)){
-        nextGenBoard[i][j] = false;
-      }else if(deadExactlyThreeLiveNeighbours(i, j) || aliveWithTwoOrThreeLiveNeighbours(i, j)) {
-        nextGenBoard[i][j] = true;
-      }
-    } else {
-      nextGenBoard[i][j] = false;
+    if(aliveLessThanTwoLiveNeighbours(i, j)){
+      live(i, j, false);
+    }else if(aliveWithTwoOrThreeLiveNeighbours(i, j)){
+      live(i, j, true);
+    }else if(aliveMoreThanThreeLiveNeighbours(i, j)){
+      live(i, j, false);
+    }else if(deadExactlyThreeLiveNeighbours(i, j)){
+      live(i, j, true);
+    }else {
+      live(i, j, false);
     }
+  }
+
+  private void live(int i, int j, boolean b) {
+    nextGenBoard[i][j] = b;
   }
 
   private boolean aliveWithTwoOrThreeLiveNeighbours(int x, int y){
