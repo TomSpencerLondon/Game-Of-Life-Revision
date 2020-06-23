@@ -1,9 +1,4 @@
 package com.codurance;
-import static org.apache.commons.lang3.builder.EqualsBuilder.reflectionEquals;
-import static org.apache.commons.lang3.builder.HashCodeBuilder.reflectionHashCode;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 public class GameOfLife {
 
@@ -23,15 +18,22 @@ public class GameOfLife {
 
     for(int i = 0; i < rowCount; i++){
       for(int j = 0; j < columnCount; j++){
-        if(lessThanTwoLiveNeighbours(i, j)){
+        if(aliveLessThanTwoLiveNeighbours(i, j)){
+          nextGenBoard[i][j] = false;
+        }else if(aliveLessThanTwoLiveNeighbours(i, j)){
           nextGenBoard[i][j] = false;
         }
+
       }
     }
   }
 
-  private boolean lessThanTwoLiveNeighbours(int x, int y) {
-    return countLiveNeighbours(x, y) < 2;
+  private boolean aliveLessThanTwoLiveNeighbours(int x, int y) {
+    return countLiveNeighbours(x, y) < 2 && board[x][y];
+  }
+
+  private boolean aliveMoreThanThreeLiveNeighbours(int x, int y){
+    return countLiveNeighbours(x, y) > 3 && board[x][y];
   }
 
   public boolean[][] getNextGenBoard() {
