@@ -11,11 +11,10 @@ public class GameOfLife {
     this.board = board;
     this.rowCount = board.length;
     this.columnCount = board[0].length;
+    nextGenBoard = new boolean[rowCount][columnCount];
   }
 
   public void nextGen(){
-    nextGenBoard = new boolean[rowCount][columnCount];
-
     for(int i = 0; i < rowCount; i++){
       for(int j = 0; j < columnCount; j++){
         if(aliveLessThanTwoLiveNeighbours(i, j)){
