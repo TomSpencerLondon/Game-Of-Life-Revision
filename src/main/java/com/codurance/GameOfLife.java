@@ -17,18 +17,20 @@ public class GameOfLife {
   public void nextGen(){
     for(int i = 0; i < rowCount; i++){
       for(int j = 0; j < columnCount; j++){
-        if(aliveLessThanTwoLiveNeighbours(i, j)){
+        if(aliveLessThanTwoLiveNeighbours(i, j))
           nextGenBoard[i][j] = false;
-        }else if(aliveLessThanTwoLiveNeighbours(i, j)){
+        else if (!aliveLessThanTwoLiveNeighbours(i, j)) {
+          if(aliveLessThanTwoLiveNeighbours(i, j)){
+            nextGenBoard[i][j] = false;
+          }else if(aliveMoreThanThreeLiveNeighbours(i, j)){
+            nextGenBoard[i][j] = false;
+          }else if(deadExactlyThreeLiveNeighbours(i, j)){
+            nextGenBoard[i][j] = true;
+          }else if(aliveWithTwoOrThreeLiveNeighbours(i, j)){
+            nextGenBoard[i][j] = true;
+          }
+        } else {
           nextGenBoard[i][j] = false;
-        }else if(aliveLessThanTwoLiveNeighbours(i, j)){
-          nextGenBoard[i][j] = false;
-        }else if(aliveMoreThanThreeLiveNeighbours(i, j)){
-          nextGenBoard[i][j] = false;
-        }else if(deadExactlyThreeLiveNeighbours(i, j)){
-          nextGenBoard[i][j] = true;
-        }else if(aliveWithTwoOrThreeLiveNeighbours(i, j)){
-          nextGenBoard[i][j] = true;
         }
       }
     }
@@ -73,11 +75,11 @@ public class GameOfLife {
 
     int liveNeighbours = 0;
 
-    for(int i = 0; i < cellsToCheck.length; i++){
-      int rowToCheck = cellsToCheck[i][0];
-      int colToCheck = cellsToCheck[i][1];
+    for (int[] ints : cellsToCheck) {
+      int rowToCheck = ints[0];
+      int colToCheck = ints[1];
 
-      if(isInTheGrid(rowToCheck, colToCheck) && isAlive(rowToCheck, colToCheck)){
+      if (isInTheGrid(rowToCheck, colToCheck) && isAlive(rowToCheck, colToCheck)) {
         liveNeighbours++;
       }
     }
