@@ -90,6 +90,7 @@ public class GameOfLifeShould {
 
     GameOfLife gameOfLife = new GameOfLife(board);
     gameOfLife.nextGen();
+    System.out.println(Arrays.deepToString(gameOfLife.getNextGenBoard()));
     assertArrayEquals(nextBoard, gameOfLife.getNextGenBoard());
   }
 

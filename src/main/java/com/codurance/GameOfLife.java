@@ -22,10 +22,26 @@ public class GameOfLife {
           nextGenBoard[i][j] = false;
         }else if(aliveLessThanTwoLiveNeighbours(i, j)){
           nextGenBoard[i][j] = false;
+        }else if(aliveLessThanTwoLiveNeighbours(i, j)){
+          nextGenBoard[i][j] = false;
+        }else if(aliveMoreThanThreeLiveNeighbours(i, j)){
+          nextGenBoard[i][j] = false;
+        }else if(deadExactlyThreeLiveNeighbours(i, j)){
+          nextGenBoard[i][j] = true;
+        }else if(aliveWithTwoOrThreeLiveNeighbours(i, j)){
+          nextGenBoard[i][j] = true;
         }
-
       }
     }
+  }
+
+  private boolean aliveWithTwoOrThreeLiveNeighbours(int x, int y){
+    int count = countLiveNeighbours(x, y);
+    return (count == 2 || count == 3) && board[x][y];
+  }
+
+  private boolean deadExactlyThreeLiveNeighbours(int x, int y) {
+    return countLiveNeighbours(x, y) == 3 && !board[x][y];
   }
 
   private boolean aliveLessThanTwoLiveNeighbours(int x, int y) {
@@ -48,12 +64,12 @@ public class GameOfLife {
     int[][] cellsToCheck = new int[][]{
         {x - 1, y - 1},
         {x - 1, y},
-        {x - 1, y - 1},
-        {x, y - 1},
+        {x - 1, y + 1},
         {x, y + 1},
-        {x + 1, y - 1},
+        {x + 1, y + 1},
         {x + 1, y},
-        {x + 1, y + 1}
+        {x + 1, y - 1},
+        {x, y - 1}
     };
 
     int liveNeighbours = 0;
