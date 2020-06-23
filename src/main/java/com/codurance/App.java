@@ -3,9 +3,6 @@ package com.codurance;
 import java.util.Arrays;
 
 public class App {
-
-  private static GameOfLife gameOfLife;
-
   public static void main(String[] args) {
     boolean [][] board = {
         {false, false, false, false, false, false},
