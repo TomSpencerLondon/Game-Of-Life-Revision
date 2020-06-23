@@ -26,13 +26,9 @@ public class GameOfLife {
     if(aliveLessThanTwoLiveNeighbours(i, j))
       nextGenBoard[i][j] = false;
     else if (!aliveLessThanTwoLiveNeighbours(i, j)) {
-      if(aliveLessThanTwoLiveNeighbours(i, j)){
+      if(aliveLessThanTwoLiveNeighbours(i, j) || aliveMoreThanThreeLiveNeighbours(i, j)){
         nextGenBoard[i][j] = false;
-      }else if(aliveMoreThanThreeLiveNeighbours(i, j)){
-        nextGenBoard[i][j] = false;
-      }else if(deadExactlyThreeLiveNeighbours(i, j)){
-        nextGenBoard[i][j] = true;
-      }else if(aliveWithTwoOrThreeLiveNeighbours(i, j)){
+      }else if(deadExactlyThreeLiveNeighbours(i, j) || aliveWithTwoOrThreeLiveNeighbours(i, j)) {
         nextGenBoard[i][j] = true;
       }
     } else {
