@@ -23,7 +23,11 @@ public class App {
       nextGame.nextGen();
       nextBoard = nextGame.getNextGenBoard();
       for(int j = 0; j < nextBoard.length; j++){
-        System.out.println(Arrays.toString(nextBoard[j]));
+        StringBuilder builder = new StringBuilder();
+        for(int k = 0; k < nextBoard[j].length; k++){
+          if(nextBoard[j][k]) builder.append("X"); else builder.append("0");
+        }
+        System.out.println(builder.toString());
       }
       System.out.println("------------------------------");
     }
