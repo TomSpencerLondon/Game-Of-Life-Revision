@@ -4,8 +4,8 @@ public class GameOfLife {
 
   private final int rowCount;
   private final int columnCount;
-  private boolean[][] board;
-  private boolean[][] nextGenBoard;
+  private final boolean[][] board;
+  private final boolean[][] nextGenBoard;
 
   public GameOfLife(boolean[][] board) {
     this.board = board;
@@ -17,22 +17,26 @@ public class GameOfLife {
   public void nextGen(){
     for(int i = 0; i < rowCount; i++){
       for(int j = 0; j < columnCount; j++){
-        if(aliveLessThanTwoLiveNeighbours(i, j))
-          nextGenBoard[i][j] = false;
-        else if (!aliveLessThanTwoLiveNeighbours(i, j)) {
-          if(aliveLessThanTwoLiveNeighbours(i, j)){
-            nextGenBoard[i][j] = false;
-          }else if(aliveMoreThanThreeLiveNeighbours(i, j)){
-            nextGenBoard[i][j] = false;
-          }else if(deadExactlyThreeLiveNeighbours(i, j)){
-            nextGenBoard[i][j] = true;
-          }else if(aliveWithTwoOrThreeLiveNeighbours(i, j)){
-            nextGenBoard[i][j] = true;
-          }
-        } else {
-          nextGenBoard[i][j] = false;
-        }
+        checkCell(i, j);
       }
+    }
+  }
+
+  private void checkCell(int i, int j) {
+    if(aliveLessThanTwoLiveNeighbours(i, j))
+      nextGenBoard[i][j] = false;
+    else if (!aliveLessThanTwoLiveNeighbours(i, j)) {
+      if(aliveLessThanTwoLiveNeighbours(i, j)){
+        nextGenBoard[i][j] = false;
+      }else if(aliveMoreThanThreeLiveNeighbours(i, j)){
+        nextGenBoard[i][j] = false;
+      }else if(deadExactlyThreeLiveNeighbours(i, j)){
+        nextGenBoard[i][j] = true;
+      }else if(aliveWithTwoOrThreeLiveNeighbours(i, j)){
+        nextGenBoard[i][j] = true;
+      }
+    } else {
+      nextGenBoard[i][j] = false;
     }
   }
 
