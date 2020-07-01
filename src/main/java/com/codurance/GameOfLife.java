@@ -10,29 +10,29 @@ public class GameOfLife extends Checker {
   }
 
   public void nextGen(){
-    for(int i = 0; i < rowCount; i++){
-      for(int j = 0; j < columnCount; j++){
-        checkCell(i, j);
+    for(int x = 0; x < rowCount; x++){
+      for(int y = 0; y < columnCount; y++){
+        updateCell(x, y);
       }
     }
   }
 
-  private void checkCell(int i, int j) {
-    if(aliveLessThanTwoLiveNeighbours(i, j)){
-      live(i, j, false);
-    }else if(aliveWithTwoOrThreeLiveNeighbours(i, j)){
-      live(i, j, true);
-    }else if(aliveMoreThanThreeLiveNeighbours(i, j)){
-      live(i, j, false);
-    }else if(deadExactlyThreeLiveNeighbours(i, j)){
-      live(i, j, true);
+  private void updateCell(int x, int y) {
+    if(aliveLessThanTwoLiveNeighbours(x, y)){
+      setAlive(x, y, false);
+    }else if(aliveWithTwoOrThreeLiveNeighbours(x, y)){
+      setAlive(x, y, true);
+    }else if(aliveMoreThanThreeLiveNeighbours(x, y)){
+      setAlive(x, y, false);
+    }else if(deadExactlyThreeLiveNeighbours(x, y)){
+      setAlive(x, y, true);
     }else {
-      live(i, j, false);
+      setAlive(x, y, false);
     }
   }
 
-  private void live(int i, int j, boolean b) {
-    nextGenBoard[i][j] = b;
+  private void setAlive(int x, int y, boolean b) {
+    nextGenBoard[x][y] = b;
   }
 
   private boolean aliveWithTwoOrThreeLiveNeighbours(int x, int y){
