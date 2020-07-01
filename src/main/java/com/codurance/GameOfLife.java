@@ -19,20 +19,24 @@ public class GameOfLife extends Checker {
 
   private void updateCell(int x, int y) {
     if(aliveLessThanTwoLiveNeighbours(x, y)){
-      setAlive(x, y, false);
+      setDead(x, y);
     }else if(aliveWithTwoOrThreeLiveNeighbours(x, y)){
-      setAlive(x, y, true);
+      setAlive(x, y);
     }else if(aliveMoreThanThreeLiveNeighbours(x, y)){
-      setAlive(x, y, false);
+      setDead(x, y);
     }else if(deadExactlyThreeLiveNeighbours(x, y)){
-      setAlive(x, y, true);
+      setAlive(x, y);
     }else {
-      setAlive(x, y, false);
+      setAlive(x, y);
     }
   }
 
-  private void setAlive(int x, int y, boolean b) {
-    nextGenBoard[x][y] = b;
+  private void setAlive(int x, int y) {
+    nextGenBoard[x][y] = true;
+  }
+
+  private void setDead(int x, int y){
+    nextGenBoard[x][y] = false;
   }
 
   private boolean aliveWithTwoOrThreeLiveNeighbours(int x, int y){
