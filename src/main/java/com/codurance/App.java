@@ -2,7 +2,7 @@ package com.codurance;
 
 public class App {
   public static void main(String[] args) {
-    boolean [][] board = {
+    boolean [][] initialWorld = {
         {false, false, false, false, false, false},
         {false, false, false, false, false, false},
         {false, false, true, true, true, false},
@@ -10,14 +10,12 @@ public class App {
         {false, false, false, false, false, false},
         {false, false, false, false, false, false}
     };
-    GameOfLife gameOfLife = new GameOfLife(board);
-    boolean[][] nextBoard = gameOfLife.getWorld();
+    GameOfLife gameOfLife = new GameOfLife(initialWorld);
 
     for (int i = 0; i < 20; i++) {
-      GameOfLife nextGame = new GameOfLife(nextBoard);
-      nextGame.nextGen();
-      nextBoard = nextGame.getNextGenWorld();
-      new BoardFormatter(nextBoard).invoke();
+      gameOfLife.nextGen();
+      boolean[][] world = gameOfLife.getNextGenWorld();
+      new BoardFormatter(world).invoke();
     }
   }
 }

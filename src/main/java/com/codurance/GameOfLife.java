@@ -65,10 +65,6 @@ public class GameOfLife {
     return nextGenWorld;
   }
 
-  public boolean[][] getWorld() {
-    return world;
-  }
-
   public int countLiveNeighbours(int x, int y) {
     int[][] cellsToCheck = new int[][]{
         {x - 1, y - 1},
