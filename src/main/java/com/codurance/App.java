@@ -11,12 +11,12 @@ public class App {
         {false, false, false, false, false, false}
     };
     GameOfLife gameOfLife = new GameOfLife(board);
-    boolean[][] nextBoard = gameOfLife.getBoard();
+    boolean[][] nextBoard = gameOfLife.getWorld();
 
     for (int i = 0; i < 20; i++) {
       GameOfLife nextGame = new GameOfLife(nextBoard);
       nextGame.nextGen();
-      nextBoard = nextGame.getNextGenBoard();
+      nextBoard = nextGame.getNextGenWorld();
       new BoardFormatter(nextBoard).invoke();
     }
   }

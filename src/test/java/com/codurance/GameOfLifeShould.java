@@ -9,27 +9,28 @@ import org.junit.jupiter.api.Test;
 public class GameOfLifeShould {
 
   @Test
-  void change_board_from_initial_state() {
-    boolean [][] board = {
+  void dead_board_remains_dead() {
+    boolean [][] world = {
         {false, false, false},
         {false, false, false},
         {false, false, false}
     };
 
-    boolean [][] nextBoard = {
+    boolean [][] nextWorld = {
         {false, false, false},
         {false, false, false},
         {false, false, false}
     };
 
-    GameOfLife gameOfLife = new GameOfLife(board);
+    GameOfLife gameOfLife = new GameOfLife(world);
     gameOfLife.nextGen();
-    assertArrayEquals(nextBoard, gameOfLife.getNextGenBoard());
+    System.out.println(Arrays.deepToString(gameOfLife.getNextGenWorld()));
+    assertArrayEquals(nextWorld, gameOfLife.getNextGenWorld());
   }
 
   @Test
   void block_stays_the_same() {
-    boolean [][] board = {
+    boolean [][] world = {
         {false, false, false, false},
         {false, true, true, false},
         {false, true, true, false},
@@ -37,40 +38,40 @@ public class GameOfLifeShould {
     };
 
 
-    boolean [][] nextBoard = {
+    boolean [][] nextWorld = {
         {false, false, false, false},
         {false, true, true, false},
         {false, true, true, false},
         {false, false, false, false}
     };
 
-    GameOfLife gameOfLife = new GameOfLife(board);
+    GameOfLife gameOfLife = new GameOfLife(world);
     gameOfLife.nextGen();
-    assertArrayEquals(nextBoard, gameOfLife.getNextGenBoard());
+    assertArrayEquals(nextWorld, gameOfLife.getNextGenWorld());
   }
 
   @Test
   void change_blinker_state() {
-    boolean [][] board = {
+    boolean [][] world = {
         {false, true, false},
         {false, true, false},
         {false, true, false}
     };
 
-    boolean [][] nextBoard = {
+    boolean [][] nextWorld = {
         {false, false, false},
         {true, true, true},
         {false, false, false}
     };
 
-    GameOfLife gameOfLife = new GameOfLife(board);
+    GameOfLife gameOfLife = new GameOfLife(world);
     gameOfLife.nextGen();
-    assertArrayEquals(nextBoard, gameOfLife.getNextGenBoard());
+    assertArrayEquals(nextWorld, gameOfLife.getNextGenWorld());
   }
 
   @Test
   void change_toad_state() {
-    boolean [][] board = {
+    boolean [][] world = {
         {false, false, false, false, false, false},
         {false, false, false, false, false, false},
         {false, false, true, true, true, false},
@@ -79,7 +80,7 @@ public class GameOfLifeShould {
         {false, false, false, false, false, false}
     };
 
-    boolean [][] nextBoard = {
+    boolean [][] nextWorld = {
         {false, false, false, false, false, false},
         {false, false, false, true, false, false},
         {false, true, false, false, true, false},
@@ -88,21 +89,21 @@ public class GameOfLifeShould {
         {false, false, false, false, false, false}
     };
 
-    GameOfLife gameOfLife = new GameOfLife(board);
+    GameOfLife gameOfLife = new GameOfLife(world);
     gameOfLife.nextGen();
-    System.out.println(Arrays.deepToString(gameOfLife.getNextGenBoard()));
-    assertArrayEquals(nextBoard, gameOfLife.getNextGenBoard());
+    System.out.println(Arrays.deepToString(gameOfLife.getNextGenWorld()));
+    assertArrayEquals(nextWorld, gameOfLife.getNextGenWorld());
   }
 
   @Test
   void live_cell_with_less_than_two_living_neighbours_dies() {
-    boolean [][] board = {
+    boolean [][] world = {
         {false, false, false},
         {false, true, false},
         {false, false, false}
     };
 
-    GameOfLife gameOfLife = new GameOfLife(board);
+    GameOfLife gameOfLife = new GameOfLife(world);
     assertEquals(0, gameOfLife.countLiveNeighbours(1, 1));
   }
 }
