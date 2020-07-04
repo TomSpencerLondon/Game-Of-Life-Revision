@@ -1,11 +1,13 @@
 package com.codurance;
 
+import java.util.Arrays;
+
 public class GameOfLife {
 
+  protected boolean[][] world;
+  private boolean[][] nextGenWorld;
   protected final int rowCount;
   protected final int columnCount;
-  protected final boolean[][] world;
-  private final boolean[][] nextGenWorld;
 
   public GameOfLife(boolean[][] world) {
     this.world = world;
@@ -20,6 +22,8 @@ public class GameOfLife {
         updateCell(x, y);
       }
     }
+    world = nextGenWorld;
+    nextGenWorld = new boolean[rowCount][columnCount];
   }
 
   private void updateCell(int x, int y) {
@@ -61,8 +65,8 @@ public class GameOfLife {
     return countLiveNeighbours(x, y) > 3 && world[x][y];
   }
 
-  public boolean[][] getNextGenWorld() {
-    return nextGenWorld;
+  public boolean[][] getWorld() {
+    return world;
   }
 
   public int countLiveNeighbours(int x, int y) {

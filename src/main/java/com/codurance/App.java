@@ -14,7 +14,7 @@ public class App {
 
     for (int i = 0; i < 20; i++) {
       gameOfLife.nextGen();
-      boolean[][] world = gameOfLife.getNextGenWorld();
+      boolean[][] world = gameOfLife.getWorld();
       new BoardFormatter(world).invoke();
     }
   }

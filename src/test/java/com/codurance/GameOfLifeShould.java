@@ -10,13 +10,13 @@ public class GameOfLifeShould {
 
   @Test
   void dead_board_remains_dead() {
-    boolean [][] world = {
+    boolean[][] world = {
         {false, false, false},
         {false, false, false},
         {false, false, false}
     };
 
-    boolean [][] nextWorld = {
+    boolean[][] nextWorld = {
         {false, false, false},
         {false, false, false},
         {false, false, false}
@@ -24,21 +24,20 @@ public class GameOfLifeShould {
 
     GameOfLife gameOfLife = new GameOfLife(world);
     gameOfLife.nextGen();
-    System.out.println(Arrays.deepToString(gameOfLife.getNextGenWorld()));
-    assertArrayEquals(nextWorld, gameOfLife.getNextGenWorld());
+    System.out.println(Arrays.deepToString(gameOfLife.getWorld()));
+    assertArrayEquals(nextWorld, gameOfLife.getWorld());
   }
 
   @Test
   void block_stays_the_same() {
-    boolean [][] world = {
+    boolean[][] world = {
         {false, false, false, false},
         {false, true, true, false},
         {false, true, true, false},
         {false, false, false, false}
     };
 
-
-    boolean [][] nextWorld = {
+    boolean[][] nextWorld = {
         {false, false, false, false},
         {false, true, true, false},
         {false, true, true, false},
@@ -47,18 +46,18 @@ public class GameOfLifeShould {
 
     GameOfLife gameOfLife = new GameOfLife(world);
     gameOfLife.nextGen();
-    assertArrayEquals(nextWorld, gameOfLife.getNextGenWorld());
+    assertArrayEquals(nextWorld, gameOfLife.getWorld());
   }
 
   @Test
   void change_blinker_state() {
-    boolean [][] world = {
+    boolean[][] world = {
         {false, true, false},
         {false, true, false},
         {false, true, false}
     };
 
-    boolean [][] nextWorld = {
+    boolean[][] nextWorld = {
         {false, false, false},
         {true, true, true},
         {false, false, false}
@@ -66,12 +65,12 @@ public class GameOfLifeShould {
 
     GameOfLife gameOfLife = new GameOfLife(world);
     gameOfLife.nextGen();
-    assertArrayEquals(nextWorld, gameOfLife.getNextGenWorld());
+    assertArrayEquals(nextWorld, gameOfLife.getWorld());
   }
 
   @Test
   void change_toad_state() {
-    boolean [][] world = {
+    boolean[][] world = {
         {false, false, false, false, false, false},
         {false, false, false, false, false, false},
         {false, false, true, true, true, false},
@@ -80,7 +79,7 @@ public class GameOfLifeShould {
         {false, false, false, false, false, false}
     };
 
-    boolean [][] nextWorld = {
+    boolean[][] nextWorld = {
         {false, false, false, false, false, false},
         {false, false, false, true, false, false},
         {false, true, false, false, true, false},
@@ -91,13 +90,13 @@ public class GameOfLifeShould {
 
     GameOfLife gameOfLife = new GameOfLife(world);
     gameOfLife.nextGen();
-    System.out.println(Arrays.deepToString(gameOfLife.getNextGenWorld()));
-    assertArrayEquals(nextWorld, gameOfLife.getNextGenWorld());
+    System.out.println(Arrays.deepToString(gameOfLife.getWorld()));
+    assertArrayEquals(nextWorld, gameOfLife.getWorld());
   }
 
   @Test
   void live_cell_with_less_than_two_living_neighbours_dies() {
-    boolean [][] world = {
+    boolean[][] world = {
         {false, false, false},
         {false, true, false},
         {false, false, false}
@@ -105,5 +104,26 @@ public class GameOfLifeShould {
 
     GameOfLife gameOfLife = new GameOfLife(world);
     assertEquals(0, gameOfLife.countLiveNeighbours(1, 1));
+  }
+
+  @Test
+  void generate_two_consecutive_worlds() {
+    boolean[][] verticalBlinker = {
+        {false, true, false},
+        {false, true, false},
+        {false, true, false}
+    };
+
+    boolean[][] horizontalBlinker = {
+        {false, false, false},
+        {true, true, true},
+        {false, false, false}
+    };
+
+    GameOfLife gameOfLife = new GameOfLife(verticalBlinker);
+    gameOfLife.nextGen();
+    assertArrayEquals(horizontalBlinker, gameOfLife.getWorld());
+    gameOfLife.nextGen();
+    assertArrayEquals(verticalBlinker, gameOfLife.getWorld());
   }
 }
